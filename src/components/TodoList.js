@@ -1,6 +1,7 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import TodoItemCreator from "./TodoItemCreator";
+import TodoItem from "./TodoItem";
 import { todoListState } from "../recoil_state";
 
 const TodoList = () => {
@@ -8,14 +9,16 @@ const TodoList = () => {
   const todoList = useRecoilValue(todoListState);
   return (
     <>
-      <TodoItemCreator />
-
-      {todoList.map((todoItem) => (
-        <>
-        <p>{todoItem.id}</p>
-        <p>{todoItem.text}</p>
-        </>
-      ))}
+      <div className="todo-template-block">
+        <TodoItemCreator />
+        <div className="todo-list-block">
+          {todoList.map((todoItem) => (
+            <>
+              <TodoItem id={todoItem.id} text={todoItem.text} isComplete={todoItem.isComplete} />
+            </>
+          ))}
+        </div>       
+      </div>
     </>
   );
 };
