@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from "recoil";
+import { todoListStatsState } from "../recoil_state";
 
 const TodoHeadBlock = styled.div`
   padding-top: 48px;
@@ -27,6 +29,10 @@ const TodoHeadBlock = styled.div`
 
 
 function TodoHead() {
+  const {
+    totalUncompletedNum,
+  } = useRecoilValue(todoListStatsState);
+
   const today = new Date();
   const dateString = today.toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -39,7 +45,7 @@ function TodoHead() {
     <TodoHeadBlock>
       <h1>{dateString}</h1>
       <div className="day">{dayName}</div>
-      <div className="tasks-left">할 일 2개 남음</div>
+      <div className="tasks-left">할 일 {totalUncompletedNum}개 남음</div>
     </TodoHeadBlock>
   );
 }
