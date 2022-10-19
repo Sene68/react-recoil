@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
+import { useRecoilState } from "recoil";
+import { todoListState } from "../recoil_state";
 
 const Remove = styled.div`
   display: flex;
@@ -57,11 +59,30 @@ const Text = styled.div`
     `}
 `;
 
-function TodoItem({ id, text, isComplete }) {
+const replaceItemAtIndex = (arr, index, newValue) => {
+  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+};
+
+function TodoItem({ item }) {
+
+    const [todoList, setTodoList] = useRecoilState(todoListState);
+    const index = todoList.findIndex((listItem) => listItem === item);
+
+    const toggleItemCompletion = () => {
+      const newList = replaceItemAtIndex(todoList, index, {
+        ...item,
+        isComplete: !item.isComplete
+      });
+
+      setTodoList(newList);
+    };
+
     return (
       <TodoItemBlock>
-        <CheckCircle done={isComplete}>{isComplete && <MdDone />}</CheckCircle>
-        <Text done={isComplete}>{text}</Text>
+        <CheckCircle done={item.isComplete} onClick={toggleItemCompletion}>
+          {item.isComplete && <MdDone />}
+        </CheckCircle>
+        <Text done={item.isComplete}>{item.text}</Text>
         <Remove>
           <MdDelete />
         </Remove>

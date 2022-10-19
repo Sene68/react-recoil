@@ -15,7 +15,7 @@ const TodoList = () => {
         <div className="todo-list-block">
           {todoList.map((todoItem) => (
             <>
-              <TodoItem id={todoItem.id} text={todoItem.text} isComplete={todoItem.isComplete} />
+              <TodoItem item={todoItem}  />
             </>
           ))}
         </div>
