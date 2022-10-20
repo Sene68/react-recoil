@@ -63,6 +63,10 @@ const replaceItemAtIndex = (arr, index, newValue) => {
   return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
 };
 
+const removeItemAtIndex = (arr, index) => {
+  return [...arr.slice(0, index), ...arr.slice(index + 1)];
+};
+
 function TodoItem({ item }) {
 
     const [todoList, setTodoList] = useRecoilState(todoListState);
@@ -77,6 +81,12 @@ function TodoItem({ item }) {
       setTodoList(newList);
     };
 
+    const deleteItem = () => {
+      const newList = removeItemAtIndex(todoList, index);
+  
+      setTodoList(newList);
+    };
+
     return (
       <TodoItemBlock>
         <CheckCircle done={item.isComplete} onClick={toggleItemCompletion}>
@@ -84,7 +94,7 @@ function TodoItem({ item }) {
         </CheckCircle>
         <Text done={item.isComplete}>{item.text}</Text>
         <Remove>
-          <MdDelete />
+          <MdDelete onClick={deleteItem} />
         </Remove>
       </TodoItemBlock>
     );
