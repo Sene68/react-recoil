@@ -24,7 +24,12 @@ const filteredTodoListState = selector({
       default:
         return list;
     }
-  }
+  },
+  set: ({ set }, newValue) => {
+    set(
+      todoListState,
+      newValue
+    )},
 });
 
 const todoListStatsState = selector({
