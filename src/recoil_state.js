@@ -10,6 +10,16 @@ const todoListFilterState = atom({
   default: "Show All"
 });
 
+const defaultTodoListState = selector({
+  key: "defaultTodoListState",
+  get: ({ get }) => get(todoListState),
+  set: ({ get, set }, newItems) => {
+      const currentItems = get(todoListState);
+      const appendedItems = [...currentItems, newItems];
+      set(todoListState, appendedItems);
+  },
+});
+
 const filteredTodoListState = selector({
   key: "filteredTodoListState",
   get: ({ get }) => {
@@ -25,11 +35,6 @@ const filteredTodoListState = selector({
         return list;
     }
   },
-  set: ({ set }, newValue) => {
-    set(
-      todoListState,
-      newValue
-    )},
 });
 
 const todoListStatsState = selector({
@@ -52,5 +57,6 @@ export {
     todoListState,
     todoListFilterState,
     todoListStatsState,
+    defaultTodoListState,
     filteredTodoListState
 };
