@@ -20,6 +20,21 @@ const addTodoListState = selector({
   },
 });
 
+const deleteTodoListState = selector({
+  key: "deleteTodoListState",
+  get: ({ get }) => get(todoListState),
+  set: ({ get, set }, item) => {
+    const currentItems = get(todoListState);
+    const removeItemAtIndex = (arr, index) => {
+      return [...arr.slice(0, index), ...arr.slice(index + 1)];
+    };
+    const index = currentItems.findIndex((listItem) => listItem === item);
+    const newList = removeItemAtIndex(currentItems, index);
+    set(todoListState, newList);
+  },
+});
+
+
 const filteredTodoListState = selector({
   key: "filteredTodoListState",
   get: ({ get }) => {
@@ -58,5 +73,6 @@ export {
     todoListFilterState,
     todoListStatsState,
     addTodoListState,
+    deleteTodoListState,
     filteredTodoListState
 };

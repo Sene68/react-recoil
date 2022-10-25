@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
 import { useRecoilState } from "recoil";
-import { todoListState } from "../recoil_state";
+import { todoListState, deleteTodoListState } from "../recoil_state";
 
 const Remove = styled.div`
   display: flex;
@@ -63,13 +63,10 @@ const replaceItemAtIndex = (arr, index, newValue) => {
   return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
 };
 
-const removeItemAtIndex = (arr, index) => {
-  return [...arr.slice(0, index), ...arr.slice(index + 1)];
-};
-
 function TodoItem({ item }) {
 
     const [todoList, setTodoList] = useRecoilState(todoListState);
+    const [todoItem, setTodoItem] = useRecoilState(deleteTodoListState);
     const index = todoList.findIndex((listItem) => listItem === item);
 
     const toggleItemCompletion = () => {
@@ -82,9 +79,7 @@ function TodoItem({ item }) {
     };
 
     const deleteItem = () => {
-      const newList = removeItemAtIndex(todoList, index);
-  
-      setTodoList(newList);
+      setTodoItem(item);
     };
 
     return (
