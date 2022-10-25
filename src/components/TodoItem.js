@@ -88,15 +88,15 @@ function TodoItem({ item }) {
     };
 
     return (
-      <TodoItemBlock>
-        <CheckCircle done={item.isComplete} onClick={toggleItemCompletion}>
-          {item.isComplete && <MdDone />}
-        </CheckCircle>
-        <Text done={item.isComplete}>{item.text}</Text>
-        <Remove>
-          <MdDelete onClick={deleteItem} />
-        </Remove>
-      </TodoItemBlock>
+        <TodoItemBlock>
+          <CheckCircle done={item.isComplete} onClick={toggleItemCompletion}>
+            {item.isComplete && <MdDone />}
+          </CheckCircle>
+          <Text done={item.isComplete}>{item.text}</Text>
+          <Remove>
+            <MdDelete onClick={deleteItem} />
+          </Remove>
+        </TodoItemBlock> 
     );
   }
   

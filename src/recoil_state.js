@@ -10,8 +10,8 @@ const todoListFilterState = atom({
   default: "Show All"
 });
 
-const defaultTodoListState = selector({
-  key: "defaultTodoListState",
+const addTodoListState = selector({
+  key: "addTodoListState",
   get: ({ get }) => get(todoListState),
   set: ({ get, set }, newItems) => {
       const currentItems = get(todoListState);
@@ -57,6 +57,6 @@ export {
     todoListState,
     todoListFilterState,
     todoListStatsState,
-    defaultTodoListState,
+    addTodoListState,
     filteredTodoListState
 };

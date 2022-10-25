@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import { useRecoilState } from "recoil";
-import { defaultTodoListState } from "../recoil_state";
+import { addTodoListState } from "../recoil_state";
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -85,7 +85,7 @@ function getId() {
 function TodoItemCreator() {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [todoItem, setTodoItem] = useRecoilState(defaultTodoListState);
+  const [todoItem, setTodoItem] = useRecoilState(addTodoListState);
 
   const onToggle = () => setOpen(!open);
 
