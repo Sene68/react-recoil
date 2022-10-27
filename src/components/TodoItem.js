@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
 import { useRecoilState } from "recoil";
-import { todoListState, deleteTodoListState, toggleTodoListState } from "../recoil_state";
+import { deleteTodoListState, toggleTodoListState } from "../recoil_state";
 
 const Remove = styled.div`
   display: flex;
